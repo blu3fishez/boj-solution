@@ -1,5 +1,4 @@
-
-/*
+/**
 9 
 9 8 7 6 5 6 7 8 9
 5, 6, 7, 8 최소 : 4번
@@ -54,6 +53,8 @@
 
 9 1 -> 최대 최소 간 차이를 계산할까? -> 그렇다고 이걸로 결정하기엔 무리가 있음
 
+반례4 : 중간에 배열값이 감소하다 증가할 때, 
+
 */
 #include <bits/stdc++.h>
 using namespace std;
@@ -68,16 +69,16 @@ int main() {
     int result = 0;
     for(int i=0; i<n; ++i) {
         cin>>a[i];
-        if (st.empty()) st.push(a[i]);
-        else {
+        if (!st.empty()) {
             if (st.top() < a[i]) {
                 result += a[i] - st.top();
             }
             while(!st.empty() && st.top() <= a[i]) {
                 st.pop();
             }
-            st.push(a[i]);
         }
+        
+        st.push(a[i]);
     }
     int max, min = st.top();
     while (!st.empty()) {
