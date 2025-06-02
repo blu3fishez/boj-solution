@@ -15,6 +15,7 @@ using vvi = vector<vector<int>>;
 
 int dp[50][50][1 << 6];
 int n, m;
+int shortest = -1;
 
 char board[50][50];
 
@@ -35,6 +36,7 @@ void backtrack(int y, int x, int key_state) {
         if (board[dy][dx] == '1') {
             if (dp[dy][dx][key_state] == -1 || dp[dy][dx][key_state] > dp[y][x][key_state] + 1) {
                 dp[dy][dx][key_state] = dp[y][x][key_state] + 1;
+                shortest = (shortest == -1 || dp[dy][dx][key_state] < shortest) ? dp[dy][dx][key_state] : shortest;
             }
             continue;
         }
@@ -108,14 +110,5 @@ int main(){
     dp[y][x][0] = 0;
     backtrack(y, x, 0);
     
-    int shortest = -1;
-    int keys = 1 << 6;
-    for(pii t : outs) {
-        for(int i=0; i<keys; ++i) {
-            if (dp[t.first][t.second][i] == -1) continue;
-            shortest = (shortest == -1 || shortest > dp[t.first][t.second][i]) ? 
-                dp[t.first][t.second][i] : shortest;
-        }
-    }
     cout<<shortest<<endl;
 }
