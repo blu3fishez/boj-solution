@@ -44,14 +44,8 @@ void backtrack(int y, int x, int key_state) {
         if ('a' <= board[dy][dx] && board[dy][dx] <= 'f') {
             // 키를 안가진 상태에서 소문자를 만난 경우
             int target_key = board[dy][dx] - 'a';
-            
-            // 키를 안가져갈 수도 있음
-            if (dp[dy][dx][key_state] == -1 || dp[dy][dx][key_state] > dp[y][x][key_state] + 1) {
-                dp[dy][dx][key_state] = dp[y][x][key_state] + 1;
-                backtrack(dy, dx, key_state);
-            }
 
-            // 키를 가져갈 수도 있음
+            // 키를 가져가는게 최대 이득임
             int taken_key_state = (1 << target_key) | key_state;
             if (dp[dy][dx][taken_key_state] == -1 || dp[dy][dx][taken_key_state] > dp[y][x][key_state] + 1) {
                 dp[dy][dx][taken_key_state] = dp[y][x][key_state] + 1;
@@ -89,10 +83,9 @@ int main(){
     // a , b , c , d , e , f 비트마스킹
 
     int x, y;
-    int out_x, out_y;
     memset(dp, -1, sizeof(dp));
-    vector<pii> outs;
     cin>>n>>m;
+
     for(int i=0; i<n; ++i) {
         string line; cin>>line;
         for(int j=0; j<m; ++j) {
@@ -100,9 +93,6 @@ int main(){
             if (board[i][j] == '0') {
                 y = i;
                 x = j;     
-            }
-            if (board[i][j] == '1') {
-                outs.push_back({i, j});
             }
         }
     }
