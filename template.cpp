@@ -12,6 +12,7 @@ using qi = queue<int>;
 using qpii = queue<pii>;
 using vi = vector<int>;
 using vvi = vector<vector<int>>;
+using ll = long long;
 
 int main(){
     fastio
