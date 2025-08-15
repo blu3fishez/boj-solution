@@ -14,7 +14,7 @@ using vi = vector<int>;
 using vvi = vector<vector<int>>;
 using ll = long long;
 
-int check_k(vvi robot_maps, int place, int n, int k, int val) {
+int check_k(int robot_maps[][51], int place, int n, int k, int val) {
     int result = 0;
 
     for(int i=0; i<n; ++i) {
@@ -32,7 +32,10 @@ int main(){
 
     for(int t = 1; t<=tc; ++t) {
         int n, k; cin>>n>>k;
-        vvi robot_maps(4, vi(n));
+        
+        int robot_maps[4][51];
+
+        memset(robot_maps, 0, sizeof(robot_maps));
 
         for(int i=0; i<4; ++i) {
             for(int j=0; j<n; ++j) {
