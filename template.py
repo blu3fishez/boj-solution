@@ -1,5 +1,5 @@
 from sys import stdin, setrecursionlimit
-input = lambda: stdin.readline().rstrip("\r\n")
+rr = lambda: stdin.readline().rstrip("\r\n")
 # uncomment if u use recursion
-# sys.setrecursionlimit(10 ** 6)
+# setrecursionlimit(10 ** 6)
 
